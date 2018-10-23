@@ -31,6 +31,7 @@ pub struct CFArrayCallBacks {
 pub struct __CFArray(c_void);
 
 pub type CFArrayRef = *const __CFArray;
+pub type CFMutableArrayRef = *mut __CFArray;
 
 extern {
     /*
@@ -52,4 +53,12 @@ extern {
     pub fn CFArrayGetValueAtIndex(theArray: CFArrayRef, idx: CFIndex) -> *const c_void;
     // CFArrayApplyFunction
     pub fn CFArrayGetTypeID() -> CFTypeID;
+
+    pub fn CFArrayCreateMutable(allocator: CFAllocatorRef, capacity: CFIndex, callBacks: *const CFArrayCallBacks) -> CFMutableArrayRef;
+    pub fn CFArrayAppendValue(theArray: CFMutableArrayRef, value: *const c_void);
+    pub fn CFArrayInsertValueAtIndex(theArray: CFMutableArrayRef, idx: CFIndex, value: *const c_void);
+    pub fn CFArraySetValueAtIndex(theArray: CFMutableArrayRef, idx: CFIndex, value: *const c_void);
+    pub fn CFArrayRemoveValueAtIndex(theArray: CFMutableArrayRef, idx: CFIndex);
+    pub fn CFArrayRemoveAllValues(theArray: CFMutableArrayRef);
+    pub fn CFArrayReplaceValues(theArray: CFMutableArrayRef, range: CFRange, newValues: *const *const c_void, newCount: CFIndex);    
 }
