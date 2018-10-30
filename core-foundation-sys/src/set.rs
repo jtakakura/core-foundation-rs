@@ -34,6 +34,7 @@ pub struct CFSetCallBacks {
 pub struct __CFSet(c_void);
 
 pub type CFSetRef = *const __CFSet;
+pub type CFMutableSetRef = *mut __CFSet;
 
 extern {
     /*
